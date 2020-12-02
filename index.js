@@ -34,11 +34,18 @@ async function playTest(url) {
   } else {
     await page.setCookie(...cookies);
     await page.goto(
-      "https://shopee.co.id/checkout/?state=H8KLCAAAAAAAAAPCtVTDi8KOw5swDMO8FUPDp2DCoTwRw6cHeip6w6tlEQjCikTDh0JkScOVI8KIwrHDiMK%2FwpfCkh9JwrfDncO2wrI9WSbCh8Kew6HCkMOyG8KJwqrCgxB5w6fDiGHCucKjwrtNwr1dw5HDlcKCwoTDljrDqyXDuEAOwq9vw6XClRzChsKnwpIIw51uw6tNwr1ew5PDu8KCwqgIw53CgMOKwqfCnF3CrcOXw4vDvXrCt8KjdEE6K0HDp8OgwobDrsK2wpRuanwsCMKXwpJZw4MkcMONchLCgSrCsDEaw5LCicOlT8KRQ8ODdcKAwoHCgcKdwr1NbgLDv0jDnEQVe1RyPy7CiMK2ZxXCohIha8O0IGzDl8KBwpEgwplowrkxwpkfMyZpwo1yT8KpB8Kfwqk8woTDgCTCjzwXwoHDt8OWMzQiwqYRWkQWTMOsHRTDljHCkDXDlMK7w7XClsOuc8O7ATTCiMKIXMKTwogHKTnDrMO3wpQuwrPCm8OKOWXDjkXDvsOywqnDhnlowpAaT8OZwqUrw7jCnsOlwoEww6vCokInw4Zuw78JD8Oaw4YCLj0ewp8reMKPVsOEScOTw5wvw5YGZChqw55hworDrsKaw5LDnMKcw7PCtsKzRcOKVMKYAjBhwpUJw7N0Gg%2FCqGDDqsOwasKTaMORYGUawpvDsR9kwofDhsKkCsO8wqRRwqYHHsKyGsOyfQBUXzzCjypUw5%2FDjMO5wqJ8FcKVw6TClyrDsMO2wqXDumpbayrCp8K0asKrw6sfw4HCmivDs0I%2Bw5IlcB%2FCkcKHw6TDpjTCj8KNw7XDncKUw4tLfBxWw79dCMKPw6LDgsKeEwwNw7PDnAh4w7jDgFPCtMKMO8Knw7tfwpBjHsO5JFzClcKAw5nCmcOpVWY5c8K2QcKxw6DCnVcmDsOxaMONWSbDg07CmsKLw4vDicOewobDqMKww4XDk8Okw4ZPw57CkURwHx8bK8K0KsO5w4HDrsOIbzN7OcOLw5EJw6nCrXvDrMOowohwaDQwwpPCulNuIsKTwoIpw5PCmjs2wrzCm8K8wpzCq8KffxrCvRHDpBB9woLDj8K4wqHCv8Odw4bCv1zDmU%2FCuMKhw5PDvw%2FDrcKQcMOLY37CpcOHSRt%2Bw6LDmcKXw79%2Bwp0HJcOJwqEXw7AYw7ZPHcOBbiPCvQUAAA%3D%3D",
+      "https://shopee.co.id/checkout/?state=H8KLCAAAAAAAAAPDlVTDi8Kuw6MgDMO9F8OWWcOQV8Kaw6ZXwq4qRMOAbcORJcOAw7DCqBpdw7XDn8OHwpDCkHbCrnTCpcOZw4xiVgHDm8OHPj52w7giUcKNECIfHcOpNy1twrvDk8K%2Bw50eGhJuw5ZZL8OBB8OSf3zClSvDqcOnwq%2FCkhjCusOpw5rCjnbCh2dDVMKEcQ7DisKnw6I8w67DtsOdwqnCpcObXUNGK0Fnw6Nuw5PCtsOtacOXbsO2w5vChnApwpk1TALDl8KsIA7Du8Ojwp4eMVlgwosvwqTCgcOlwoTCpMK%2FcB1gwq7Dg8Kuw54mVyBkw4HCkMKGw7xKw5xEFSfDjMOzPDdEw5vCqwpRwonCkAl7EHYcw4FIwpBMw5zCuDHCmQ16TMOSGsOJD2kCwp9LegjCgUkeeQZFw77CqDYswoQVw4B7w6sZw4oUw5NiwqnCkDg5ID1dDcKZw5rCqcOdHWhHMX0ADSJiw6nDisOpw4XCgcO0HcKlXcKXwpVWw44pc8KdwoV4w4M4DxcswozCpyzDoR3DvMOEw7LCsMKYdVHCoUA5wpzDvkV4w5A2wpbDoMOSw7LDuR3DgSdUJlZOa8O7wogNWMKhwrDDuRZTeMKfKMONw405b0dbwqhUYArDgMKEVSbCrEPCu3hABsK1w4PCu03DosKGeitzwrE5w74Hw6%2FDnMKYVMKBDxppesOgIcKzw4nDvH%2FDiihww43DsmAyLcONw6PDhcO6wrHDusOybsKew6fChcO%2BZsOCwqPDuGTDrw7ChsKtem4Ewrw6w6ApWsOGwp3Dk8OTH8KRwosfw6tJwrgrAWtPw7Uqw6c9WcKuFyQLw555ZcOibMKPw5ZcZTJsw5BcfA7DtjFbw6d1wqzCmi8pwp9YRHAfX8K7JsK0KsO%2BWcKowrzCrcK1ejnDi0UJw6nCrXttw5cSw6Fuw5YAM2kcchNlwrlNw5F5w63DmMOwwrFqwrnCosOfwp%2FCgsOJCMOSR8Kfw6DDv8O%2Fw5XDqiPCh8OqSHjDpMKpf8OQc8Klwoopw55lw7rDp8O%2Fw6XDjCQ5wpQGXsKzw78NCHDCggLCogUAAA%3D%3D",
       { waitUntil: "networkidle2", timeout: 0 }
     );
+    var status = false;
+    var harga = 15000;
+    var time = null;
 
-    setInterval(async () => {
+    // setTimeout(() => {
+    //   harga = 100000;
+    // }, 2000);
+    status && clearInterval(time);
+    time = setInterval(async () => {
       await page.setDefaultNavigationTimeout(0);
       let data = await page.evaluate(() =>
         document
@@ -47,18 +54,37 @@ async function playTest(url) {
           )
           .innerText.trim()
       );
-      if (number(data) < 100000) {
-        await console.log("dapat");
-        clearInterval();
-        // klik cekout
-        await page.click("div.OR36Xx div button.stardust-button");
-        clearInterval();
+      let title = await page.evaluate(() =>
+        document
+          .querySelector(
+            ".checkout-product-ordered-list-item__header .checkout-product-ordered-list-item__product-info"
+          )
+          .innerText.trim()
+      );
+
+      // let judul =
+
+      if (number(data) > 0 && number(data) < harga) {
+        try {
+          status = true;
+          await console.log("loading...");
+          await console.log("pembelian sedang di proses");
+          // klik cekout
+          await console.log("pembelian berhasil", title);
+          await page.click("div.OR36Xx div button.stardust-button");
+        } catch (error) {
+          // console.log()
+        }
         // process.exit(1);
       } else {
-        await console.log("gagal, harga", number(data));
+        status = false;
+        await console.log(`pembelian ${title} gagal`);
+        await console.log("harga", number(data));
         await page.reload({ waitUntil: ["networkidle0", "domcontentloaded"] });
       }
     }, 1500);
+
+    status && clearInterval(time);
   }
 
   //   await page.screenshot({ path: "linkedin.png" });
