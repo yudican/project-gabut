@@ -7,7 +7,7 @@ const PASSWORD_SELECTOR = "div._3Uo2e7 div ._56AraZ";
 const CTA_SELECTOR = "div._1B7mke button._35rr5y";
 
 async function startBrowser() {
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
   return { browser, page };
 }
@@ -30,11 +30,11 @@ async function playTest(url) {
     }, 1000);
     await page.waitForNavigation();
     let currentCookies = await page.cookies();
-    fs.writeFileSync("./cookies.json", JSON.stringify(currentCookies, null));
+    fs.writeFileSync("./cookies.json", JSON.stringify(currentCookies));
   } else {
     await page.setCookie(...cookies);
     await page.goto(
-      "https://shopee.co.id/checkout/?state=H8KLCAAAAAAAAAPCtVTDi8KOGyEQw7zClRFna8KFd8O9GMOPD8OkFMOlwpbDi8OKQhh6bGQGCA%2FDi8KjwpXDvz0Nw7PCsMKzw4lGOWxOw4Z0NVVdw509byTCqg5Cw6TCnSPDjXJDN8KrbcK9XcKtFiTCnMKswrNewoIPwqR5fSt%2FSTPDvCpJwpo1w53DksKaPsOvbgvCoiJ0AyjCn3LCsMKmwpt6R8Kfw5fDtcKCdFbCgsOOdxvDusKyw5otd3RFw7FxLiXCs8KGScOgwprDpcOgcsO9woJwDMKow4DDhlhIB8KWw58jTcOLdcKAwoHChh3CvU3CrsKkwpAxwocsw4jCj8OETVTCscOHd27DuwXDkcO2wqhCVCJkwr0ewoTDrTowEiQTJ25MVsKDEcKTwrRGw63Ch8OUwoPDj8KUHkJgwpJHwp7Ck8OAe8OrGcKaEsOTCC3Ckgsmw7YOSEPDp8KLYsOGZlPDl8ObOsKbEUDCg8KISDbCqcK4wrNmX2hdZ2vClXPDihzCh8OSH3LCnMKHFsK5w7HClE3Cu8KAw69Zw64OwrMuKsK0JMODw6k%2Fw4DCg8K2wrHCgEvCkcO7w4cMw57Coxdxw5I0F8KMwrkBGcKKwpp3wpjContHKcOFw6LCnMK3wp0tUsKmw4QUwoAJwqtMwpjDm8OUekAFU8KFF8Kbw4QJHVbCpsK1GcO%2FQXQoTMKqw4APGmV6w6Ahwqshw58HQMO1w4XDs8KoQsO1w40cw4%2FDildRSX7CrgI%2FPVVfw63DicKaw4opwq1Ow5XDpcKPYMONwpV5Ih%2FDqRI4wp7DiENyccKaw4fDlsO6bsKKw6XCkcOeD3vDsMOuCsKPw6LDjB4DDA3Ds8OcCMK4w7vDgFPCtMKMO8Knw7tfwpBjHMO5JFzClMKAw5nCmcOpbx5tMkdbFAvDnnllw6JwH8KtOcOKZMOYQXNxPsOYw6twO8KMw7HDlMK5w7HDiRvCkgjDrsOjfWTChVYlPsOYHcO5dWYvZzk6IcK9dcO3GR0RDsKNBmZSd8OIRWRSMMKlW3PDhcKGd8KTwpdzw7bDoxfCpDfCgjTDkSfDuMKMFcO9bR3Dv8KywrPCn8KxwqLDk8OXEMO9wpBww419fsKlw7tJHD7DsWjDjH%2FDn8OnQUlyaAbDnMK7w70TwrJUecKgw4sFAAA%3D",
+      "https://shopee.co.id/checkout/?state=H8KLCAAAAAAAAAPCtVTDi8KOw5swDMO8FUPDp2DCoTwRw6cHeip6w6tlEQjCikTDh0JkScOVI8KIwrHDiMK%2FwpfCkh9JwrfDncO2wrI9WSbCh8Kew6HCkMOyG8KJwqrCgxB5w6fDiGHCucKjwrtNwr1dw5HDlcKCwoTDljrDqyXDuEAOwq9vw6XClRzChsKnwpIIw51uw6tNwr1ew5PDu8KCwqgIw53CgMOKwqfCnF3CrcOXw4vDvXrCt8KjdEE6K0HDp8OgwobDrsK2wpRuanwsCMKXwpJZw4MkcMONchLCgSrCsDEaw5LCicOlT8KRQ8ODdcKAwoHCgcKdwr1NbgLDv0jDnEQVe1RyPy7CiMK2ZxXCohIha8O0IGzDl8KBwpEgwplowrkxwpkfMyZpwo1yT8KpB8Kfwqk8woTDgCTCjzwXwoHDt8OWMzQiwqYRWkQWTMOsHRTDljHCkDXDlMK7w7XClsOuc8O7ATTCiMKIXMKTwogHKTnDrMO3wpQuwrPCm8OKOWXDjkXDvsOywqnDhnlowpAaT8OZwqUrw7jCnsOlwoEww6vCokInw4Zuw78JD8Oaw4YCLj0ewp8reMKPVsOEScOTw5wvw5YGZChqw55hworDrsKaw5LDnMKcw7PCtsKzRcOKVMKYAjBhwpUJw7N0Gg%2FCqGDDqsOwasKTaMORYGUawpvDsR9kwofDhsKkCsO8wqRRwqYHHsKyGsOyfQBUXzzCjypUw5%2FDjMO5wqJ8FcKVw6TClyrDsMO2wqXDumpbayrCp8K0asKrw6sfw4HCmivDs0I%2Bw5IlcB%2FCkcKHw6TDpjTCj8KNw7XDncKUw4tLfBxWw79dCMKPw6LDgsKeEwwNw7PDnAh4w7jDgFPCtMKMO8Knw7tfwpBjHsO5JFzClcKAw5nCmcOpVWY5c8K2QcKxw6DCnVcmDsOxaMONWSbDg07CmsKLw4vDicOewobDqMKww4XDk8Okw4ZPw57CkURwHx8bK8K0KsO5w4HDrsOIbzN7OcOLw5EJw6nCrXvDrMOowohwaDQwwpPCulNuIsKTwoIpw5PCmjs2wrzCm8K8wpzCq8KffxrCvRHDpBB9woLDj8K4wqHCv8Odw4bCv1zDmU%2FCuMKhw5PDvw%2FDrcKQcMOLY37CpcOHSRt%2Bw6LDmcKXw79%2Bwp0HJcOJwqEXw7AYw7ZPHcOBbiPCvQUAAA%3D%3D",
       { waitUntil: "networkidle2", timeout: 0 }
     );
 
@@ -47,12 +47,13 @@ async function playTest(url) {
           )
           .innerText.trim()
       );
-      if (number(data) > 16000) {
+      if (number(data) < 100000) {
         await console.log("dapat");
         clearInterval();
         // klik cekout
-
-        process.exit(1);
+        await page.click("div.OR36Xx div button.stardust-button");
+        clearInterval();
+        // process.exit(1);
       } else {
         await console.log("gagal, harga", number(data));
         await page.reload({ waitUntil: ["networkidle0", "domcontentloaded"] });
