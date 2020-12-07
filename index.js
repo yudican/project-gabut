@@ -33,19 +33,19 @@ async function playTest(url) {
     fs.writeFileSync("./cookies.json", JSON.stringify(currentCookies));
   } else {
     await page.setCookie(...cookies);
+    await page.setDefaultNavigationTimeout(0);
     await page.goto(
-      "https://shopee.co.id/checkout/?state=H8KLCAAAAAAAAAPDlVTDi8Kuw6MgDMO9F8OWWcOQV8Kaw6ZXwq4qRMOAbcORJcOAw7DCqBpdw7XDn8OHwpDCkHbCrnTCpcOZw4xiVgHDm8OHPj52w7giUcKNECIfHcOpNy1twrvDk8K%2Bw50eGhJuw5ZZL8OBB8OSf3zClSvDqcOnwq%2FCkhjCusOpw5rCjnbCh2dDVMKEcQ7DisKnw6I8w67DtsOdwqnCpcObXUNGK0Fnw6Nuw5PCtsOtacOXbsO2w5vChnApwpk1TALDl8KsIA7Du8Ojwp4eMVlgwosvwqTCgcOlwoTCpMK%2FcB1gwq7Dg8Kuw54mVyBkw4HCkMKGw7xKw5xEFSfDjMOzPDdEw5vCqwpRwonCkAl7EHYcw4FIwpBMw5zCuDHCmQ16TMOSGsOJD2kCwp9LegjCgUkeeQZFw77CqDYswoQVw4B7w6sZw4oUw5NiwqnCkDg5ID1dDcKZw5rCqcOdHWhHMX0ADSJiw6nDisOpw4XCgcO0HcKlXcKXwpVWw44pc8KdwoV4w4M4DxcswozCpyzDoR3DvMOEw7LCsMKYdVHCoUA5wpzDvkV4w5A2wpbDoMOSw7LDuR3DgSdUJlZOa8O7wogNWMKhwrDDuRZTeMKfKMONw405b0dbwqhUYArDgMKEVSbCrEPCu3hABsK1w4PCu03DosKGeitzwrE5w74Hw6%2FDnMKYVMKBDxppesOgIcKzw4nDvH%2FDiihww43DsmAyLcONw6PDhcO6wrHDusOybsKew6fChcO%2BZsOCwqPDuGTDrw7ChsKtem4Ewrw6w6ApWsOGwp3Dk8OTH8KRwosfw6tJwrgrAWtPw7Uqw6c9WcKuFyQLw555ZcOibMKPw5ZcZTJsw5BcfA7DtjFbw6d1wqzCmi8pwp9YRHAfX8K7JsK0KsO%2BWcKowrzCrcK1ejnDi0UJw6nCrXttw5cSw6Fuw5YAM2kcchNlwrlNw5F5w63DmMOwwrFqwrnCosOfwp%2FCgsOJCMOSR8Kfw6DDv8O%2Fw5XDqiPCh8OqSHjDpMKpf8OQc8Klwoopw55lw7rDp8O%2Fw6XDjCQ5wpQGXsKzw78NCHDCggLCogUAAA%3D%3D",
+      "https://shopee.co.id/checkout/?state=H8KLCAAAAAAAAAPDlVTDi8KOw6MgEMO8F8OOOTjDjjrDscO4V0YRw4LDkE7DkGBgeETCsUbDucO3bcOAOMKZwpVGe8Oaw4PCngzDvcKqw6rDqsOGXyTDiBl8YMKzJcODw77DmMKcDsO7Y8OfdTvDosKvw4YaJ8OAeTLCvH%2FDpSsZw4pXCjLDvGrCmsK2w63DtsKPHcKRAcOmEsKTTsOJw5d2fcOTwr3DtcKnw4NpR2YjQGVjw5t0w73CoW9zcSYENcKaCmDCiiZnwoNlPF3CrT7CjjTClSLDg8OEwpTCh8KCQC%2FDjkRbwoM%2FI8OTQcKGBSk%2Fw447wqLDjEXDuiDCuU8MHXAzw4%2FCoAUIw4rCr0zDq8KEwo8eHcKVQsK6Y1zDgCUoB8OeU8OBAktJwoHDncKrwo0MwoTDrAg4ZxxFXUJcLTUlLBYywonDlcKQKMK9HQ9dw5M3WMOewoMCHhDCunJ6ciBDw580fcKfwqTClcOWSn3DicOdw6xfcsKswoMJwoHDscKURMK7woFbaMKaDjU2SBRmbcO%2Bwq%2FDoV7CmcKQwoNzw4vDp8OXDMK2wqAywqFyw5rDmsKvw7fClWTDlzbCiMKzGcKTw7zClcKCwp5MSsO4diXDvVtOw5kTFABpeHTDocOAw7Fiwp3CmU3CjsKsSMORA8OlRmrCv013csKAwpTCqyQ3E8O5FQdUwoF%2Bw7AWJcKEw7RsVMOYwpcDw6YTZmrDuMKnwoocNzFNMsORUixMw4bDjcOVwpfDlsO3XFbDvg8THsO5B311UMOUw48xw43DocOZAcKLw4FQZsKtWsK%2BRcKufsOEE3DCkxzCtsKew6pVwpTDhVrCrxPCkgVnwp3DlMKhw5jCg8ORFxE1HRXDox%2FCo8K5F2vDmcOfOsOIwrXDpANBOHPDocK5wpxcw4nDrC9CwqXDtcKuw6jDuSxWJcKEM8O2wrnCjmvChMK9Gg1Uw4d5TE3DpMOXwqDCs8OOW8OHwprDjVXDiy3Du8O1Z8KxaE7ChsOgIsO8w79vwrPDvgZRHQHDtzTDtcO3w6ZcwqliwokqU1nCvX%2FDvsKUC8KXaFEceE7DvzfCtMOMw5VLw4YFAAA%3D",
       { waitUntil: "networkidle2", timeout: 0 }
     );
-    var status = false;
-    var harga = 15000;
+    var status = true;
+    var harga = 1000;
     var time = null;
 
     // setTimeout(() => {
     //   harga = 100000;
     // }, 2000);
-    status && clearInterval(time);
-    time = setInterval(async () => {
+    while (status) {
       await page.setDefaultNavigationTimeout(0);
       let data = await page.evaluate(() =>
         document
@@ -63,10 +63,12 @@ async function playTest(url) {
       );
 
       // let judul =
-
+      let start = new Date().getTime();
+      let end = new Date("04-12-2020 23:59:59").getTime();
+      console.log(start, end);
       if (number(data) > 0 && number(data) < harga) {
         try {
-          status = true;
+          status = false;
           await console.log("loading...");
           await console.log("pembelian sedang di proses");
           // klik cekout
@@ -77,14 +79,13 @@ async function playTest(url) {
         }
         // process.exit(1);
       } else {
-        status = false;
+        status = true;
         await console.log(`pembelian ${title} gagal`);
         await console.log("harga", number(data));
+        await console.log("target", harga);
         await page.reload({ waitUntil: ["networkidle0", "domcontentloaded"] });
       }
-    }, 1500);
-
-    status && clearInterval(time);
+    }
   }
 
   //   await page.screenshot({ path: "linkedin.png" });
